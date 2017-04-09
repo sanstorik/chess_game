@@ -1,0 +1,214 @@
+fileFormatVersion: 2
+guid: 3577453dad01a2448a08dfb83ff1e768
+timeCreated: 1484831840
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Chess_Pieces_Sprite.svg_0
+    21300002: Chess_Pieces_Sprite.svg_1
+    21300004: Chess_Pieces_Sprite.svg_2
+    21300006: Chess_Pieces_Sprite.svg_3
+    21300008: Chess_Pieces_Sprite.svg_4
+    21300010: Chess_Pieces_Sprite.svg_5
+    21300012: Chess_Pieces_Sprite.svg_6
+    21300014: Chess_Pieces_Sprite.svg_7
+    21300016: Chess_Pieces_Sprite.svg_8
+    21300018: Chess_Pieces_Sprite.svg_9
+    21300020: Chess_Pieces_Sprite.svg_10
+    21300022: Chess_Pieces_Sprite.svg_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_0
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 367
+        width: 259
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_1
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 370
+        width: 286
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_2
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 373
+        width: 257
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_3
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 372
+        width: 250
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_4
+      rect:
+        serializedVersion: 2
+        x: 1394
+        y: 372
+        width: 212
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_5
+      rect:
+        serializedVersion: 2
+        x: 1738
+        y: 368
+        width: 183
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_6
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 34
+        width: 259
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_7
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 28
+        width: 286
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_8
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 40
+        width: 257
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_9
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 38
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_10
+      rect:
+        serializedVersion: 2
+        x: 1394
+        y: 38
+        width: 212
+        height: 235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - serializedVersion: 2
+      name: Chess_Pieces_Sprite.svg_11
+      rect:
+        serializedVersion: 2
+        x: 1738
+        y: 35
+        width: 183
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
