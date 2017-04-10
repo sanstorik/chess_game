@@ -46,11 +46,7 @@ public class Board : MonoBehaviour {
             }
         }
 
-        board[0, 0].CreateFigureOnCell(Figures.QUEEN, false);
-        //MovingAlgorythms.INSTANCE.SolveTracingProblem(board[0, 0].GetFigureController());
-        ReverseInferenceAlgorythm.INSTANCE.SolveTracingAlgorythm(board[0, 0].GetFigureController(), board[4,4]);
-
-       //CreateFigures();
+        CreateFigures();
 	}
 
     void CreateCell(int row, int column)
@@ -74,41 +70,11 @@ public class Board : MonoBehaviour {
 
     void CreateFigures()
     {
-        for(int row = 0; row < BOARD_SIZE; row++)
-        {
-            for(int column = 0; column < BOARD_SIZE; column++)
-            {
-                if (row == 1)
-                    board[row, column].CreateFigureOnCell(Figures.PAWN, false);
-                else if(row == BOARD_SIZE - 2)
-                    board[row, column].CreateFigureOnCell(Figures.PAWN, true);
-            }
-            CreateMainFigures(row);
-        }
-    }
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                board[i, j].CreateFigureOnCell(Figures.PAWN, true);
 
-    void CreateMainFigures(int row)
-    {
-        bool isWhiteFigure = false;
 
-        if (row == 0)
-            isWhiteFigure = false;
-        else if (row == BOARD_SIZE - 1)
-            isWhiteFigure = true;
-
-        if (row == 0 || row == BOARD_SIZE - 1) {
-            board[row, 0].CreateFigureOnCell(Figures.ROOK, isWhiteFigure);
-            board[row, BOARD_SIZE - 1].CreateFigureOnCell(Figures.ROOK, isWhiteFigure);
-
-            board[row, 1].CreateFigureOnCell(Figures.KNIGHT, isWhiteFigure);
-            board[row, BOARD_SIZE - 2].CreateFigureOnCell(Figures.KNIGHT, isWhiteFigure);
-
-            board[row, 2].CreateFigureOnCell(Figures.BISHOP, isWhiteFigure);
-            board[row, BOARD_SIZE - 3].CreateFigureOnCell(Figures.BISHOP, isWhiteFigure);
-
-            board[row, 3].CreateFigureOnCell(Figures.QUEEN, isWhiteFigure);
-            board[row, 4].CreateFigureOnCell(Figures.KING, isWhiteFigure);
-        }
     }
 
     public GameObject GetPrefab(Figures type, bool isWhite)
