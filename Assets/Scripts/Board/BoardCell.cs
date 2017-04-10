@@ -56,8 +56,11 @@ namespace Shvetsov_Int_knowl_lab_4
             get { return isWhiteCell; }
         }
 
+ 
         public override bool Equals(object obj)
         {
+            if (obj == null)
+                return false;
             BoardCell cell = (BoardCell)obj;
             return (cell.rowIndex == rowIndex) && (cell.columnIndex == columnIndex);
         }
@@ -70,16 +73,6 @@ namespace Shvetsov_Int_knowl_lab_4
         public override string ToString()
         {
             return "row = " + (rowIndex + 1) + " column= " + (columnIndex + 1); 
-        }
-
-        static public bool operator==(BoardCell x, BoardCell y)
-        {
-            return (x.rowIndex == y.rowIndex) && (x.columnIndex == y.columnIndex);
-        }
-
-        static public bool operator!= (BoardCell x, BoardCell y)
-        {
-            return !((x.rowIndex == y.rowIndex) && (x.columnIndex == y.columnIndex));
         }
     }
 }

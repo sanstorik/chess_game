@@ -5,6 +5,11 @@ using System.Collections.Generic;
 using DG.Tweening;
 using System.Collections;
 
+public enum Figures
+{
+    ROOK
+}
+
 public class FigureController : MonoBehaviour {
 
     Figure figure;
@@ -15,31 +20,8 @@ public class FigureController : MonoBehaviour {
 
         switch (type)
         {
-            case Figures.QUEEN:
-                figure = new Queen(cell, isWhiteFigure);
-                break;
-            case Figures.PAWN:
-                figure = new Pawn(cell, isWhiteFigure);
-                Pawn pawn = (Pawn)figure;
-                pawn.OnPawnChangeToQueenEvent += () => 
-                {
-                    Board.INSTANCE[figure.CurrentCell].CreateFigureOnCell(Figures.QUEEN, figure.IsWhiteFigure);
-                    gameObject.SetActive(false);
-                };
-                pawn = null;
-                break;
-
-            case Figures.KNIGHT:
-                figure = new Knight(cell, isWhiteFigure);
-                break;
-            case Figures.KING:
-                figure = new King(cell, isWhiteFigure);
-                break;
             case Figures.ROOK:
                 figure = new Rook(cell, isWhiteFigure);
-                break;
-            case Figures.BISHOP:
-                figure = new Bishop(cell, isWhiteFigure);
                 break;
         }
 
@@ -69,16 +51,6 @@ public class FigureController : MonoBehaviour {
     {
         cell.SetGameFigureIgnoringRules(this);
         figure.MoveFigureToCellIgnoringRules(cell.Cell);
-    }
-
-    public List<ProductiveRule> GetWorkRules()
-    {
-        return figure.WorkRules;
-    }
-
-    public IEnumerable<ProductiveRule> GetValidRules()
-    {
-        return figure.GetValidMoves();
     }
 
     public Figure Figure

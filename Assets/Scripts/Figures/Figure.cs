@@ -10,7 +10,6 @@ namespace Shvetsov_Int_knowl_lab_4.Figures
     {
         protected int maxCountOfRules;
         protected BoardCell currentCell;
-        protected List<ProductiveRule> workRules;
         protected bool isWhiteFigure;
 
         public event Action<BoardCell> OnFigureMovedEvent;
@@ -21,10 +20,6 @@ namespace Shvetsov_Int_knowl_lab_4.Figures
             this.isWhiteFigure = isWhiteFigure;
             this.currentCell = currentCell;
 
-            FigureMoveRules.InitializeRules(this);
-
-            workRules = new List<ProductiveRule>();
-
             OnFigureRemovedEvent += () =>
             {
                 if (isWhiteFigure)
@@ -32,17 +27,6 @@ namespace Shvetsov_Int_knowl_lab_4.Figures
                 else
                     GameData.blackFiguresRemoved++;
             };
-
-            OnFigureMovedEvent += (cell) =>
-            {
-                workRules.Clear();
-
-                workRules = FigureMoveRules.GetMoveRules(this)
-                     .Select(rule => rule)
-                     .Where(rule => rule.LeftHandSideRule == CurrentCell)
-                     .OrderBy(rule => rule.Priority).ToList();
-            };
-            OnFigureMovedEvent(currentCell);
 
             OnFigureMovedEvent += (cell) => GameData.ChangeTurn();
         }
@@ -106,22 +90,6 @@ namespace Shvetsov_Int_knowl_lab_4.Figures
             return CheckMove(currentCell, to);
         }
 
-        public List<ProductiveRule> WorkRules
-        {
-            get { return workRules; }
-        }
-
-        public IEnumerable<ProductiveRule> GetValidMoves()
-        {
-            foreach (ProductiveRule rule in workRules)
-            {
-                var isFigureOnCell = rule.RightHandSideRule.GetFigureOrDefault();
-
-                if ((isFigureOnCell == null || isFigureOnCell.IsWhiteFigure != IsWhiteFigure) && 
-                    CheckMove(rule.RightHandSideRule))
-                       yield return rule;
-            }
-        }
 
         public BoardCell CurrentCell
         {

@@ -78,15 +78,8 @@
     <Compile Include="Assets\Scripts\Board\BoardCell.cs" />
     <Compile Include="Assets\Scripts\Board\ChessBoard.cs" />
     <Compile Include="Assets\Scripts\Board\GameData.cs" />
-    <Compile Include="Assets\Scripts\Figures\Bishop.cs" />
     <Compile Include="Assets\Scripts\Figures\Figure.cs" />
-    <Compile Include="Assets\Scripts\Figures\King.cs" />
-    <Compile Include="Assets\Scripts\Figures\Knight.cs" />
     <Compile Include="Assets\Scripts\Figures\Pawn.cs" />
-    <Compile Include="Assets\Scripts\Figures\Queen.cs" />
-    <Compile Include="Assets\Scripts\Figures\Rook.cs" />
-    <Compile Include="Assets\Scripts\Rules\FigureMoveRules.cs" />
-    <Compile Include="Assets\Scripts\Rules\ProductiveRule.cs" />
     <Compile Include="Assets\Scripts\Unity\Board.cs" />
     <Compile Include="Assets\Scripts\Unity\CellController.cs" />
     <Compile Include="Assets\Scripts\Unity\EndGame.cs" />

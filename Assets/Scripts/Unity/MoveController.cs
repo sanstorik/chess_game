@@ -44,15 +44,12 @@ public class MoveController : MonoBehaviour {
                 var spriteRenderer = figure.transform.GetComponent<SpriteRenderer>();
                 figureSortingOrder = spriteRenderer.sortingOrder;
                 spriteRenderer.sortingOrder += 2;
-
-                ShowAllValidMoves();
             }
         }
         else if(Input.GetMouseButtonUp(0) && movingFigure)
         {
             movingFigure = false;
             figure.transform.GetComponent<SpriteRenderer>().sortingOrder = figureSortingOrder;
-            HideAllValidMoves();
 
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -74,24 +71,6 @@ public class MoveController : MonoBehaviour {
             pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             pos.z = 0f;
             figure.collider.transform.position = pos;
-        }
-    }
-
-    void ShowAllValidMoves()
-    {
-        var workRules = figureController.GetValidRules();
-        foreach(ProductiveRule rule in workRules)
-        {
-            Board.INSTANCE[rule.RightHandSideRule].StartGlowing();
-        }
-    }
-
-    void HideAllValidMoves()
-    {
-        var workRules = figureController.GetWorkRules();
-        foreach (ProductiveRule rule in workRules)
-        {
-            Board.INSTANCE[rule.RightHandSideRule].EndGlowing();
         }
     }
 

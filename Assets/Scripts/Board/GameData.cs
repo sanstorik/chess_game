@@ -29,9 +29,9 @@ namespace Assets.Scripts.Board
 
         static public void ChangeTurn()
         {
-            isWhiteTurn = !isWhiteTurn;
-            turnsPassed++;
-            OnChangeTurnEvent(isWhiteTurn);
+            //isWhiteTurn = !isWhiteTurn;
+            //turnsPassed++;
+            //OnChangeTurnEvent(isWhiteTurn);
         }
     }
 }

@@ -48,10 +48,10 @@
         {
             get
             {
-                if (row >= 0 && column >= 0)
+                if (row >= 0 && column >= 0 && row < BOARD_SIZE && column < BOARD_SIZE)
                     return board[row, column];
                 else
-                    throw new System.Exception("BOARDCELL OUT OF RANGE");
+                    return null;
             }
         }
 

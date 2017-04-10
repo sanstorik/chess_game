@@ -39,12 +39,8 @@ public class Board : MonoBehaviour {
         board = new CellController[BOARD_SIZE, BOARD_SIZE];
 
         for(int row = 0; row < BOARD_SIZE; row++)
-        {
             for(int column = 0; column < BOARD_SIZE; column++)
-            {
                     CreateCell(row,column);
-            }
-        }
 
         CreateFigures();
 	}
@@ -72,7 +68,11 @@ public class Board : MonoBehaviour {
     {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
-                board[i, j].CreateFigureOnCell(Figures.PAWN, true);
+                board[i, j].CreateFigureOnCell(Figures.ROOK, true);
+
+        for (int i = BOARD_SIZE - 1; i >= BOARD_SIZE - 3; i--)
+            for (int j = BOARD_SIZE - 1 ; j >= BOARD_SIZE - 3; j--)
+                board[i, j].CreateFigureOnCell(Figures.ROOK, false);
 
 
     }

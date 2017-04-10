@@ -4,19 +4,10 @@ using UnityEngine;
 
 namespace Shvetsov_Int_knowl_lab_4.Figures
 {
-    class Pawn : Figure
+    class Rook : Figure
     {
-        public event Action OnPawnChangeToQueenEvent;
-        public Pawn(BoardCell cell, bool isWhiteFigure) : base(cell, isWhiteFigure)
+        public Rook(BoardCell cell, bool isWhiteFigure) : base(cell, isWhiteFigure)
         {
-            OnFigureMovedEvent += (movedOnCell) =>
-            {
-                if ((IsWhiteFigure && movedOnCell.RowIndex == 0) ||
-                      (!IsWhiteFigure && movedOnCell.RowIndex == ChessBoard.INSTANCE.BoardSize - 1))
-                {
-                    OnPawnChangeToQueenEvent();
-                }
-            };
         }
 
         public override bool CheckMove(BoardCell from, BoardCell to)
@@ -24,24 +15,31 @@ namespace Shvetsov_Int_knowl_lab_4.Figures
             if (from == to)
                 return false;
 
-            bool isValidMove = false;
-            int incrementOnMove = IsWhiteFigure ? -1 : 1;
+            bool rightLeftMove = Math.Abs(from.RowIndex - to.RowIndex) + Math.Abs(from.ColumnIndex - to.ColumnIndex) == 1;
+            bool diagonalMove = Math.Abs(from.RowIndex - to.RowIndex) == 1 && Math.Abs(from.ColumnIndex - to.ColumnIndex) == 1;
 
-            bool moveForward = to.RowIndex - from.RowIndex == incrementOnMove && to.ColumnIndex == from.ColumnIndex &&
-                !to.IsFigureOnCell();
-            bool moveFromStartingPosition = to.RowIndex - from.RowIndex == incrementOnMove * 2 && to.ColumnIndex == from.ColumnIndex &&
-                !to.IsFigureOnCell() && !ChessBoard.INSTANCE[from.RowIndex + incrementOnMove, from.ColumnIndex].IsFigureOnCell();
+            if (rightLeftMove || diagonalMove && ( from.RowIndex == to.RowIndex || from.ColumnIndex == to.ColumnIndex ))
+                return true;
 
-            bool killingOtherFigure = to.RowIndex - from.RowIndex == incrementOnMove &&
-                Mathf.Abs(to.ColumnIndex - from.ColumnIndex) == 1 && to.IsFigureOnCell();
+            if (
+                ChessBoard.INSTANCE[from.RowIndex - GetRowDiff(from, to), from.ColumnIndex - GetColumnDiff(from, to)] != null &&
+                ChessBoard.INSTANCE[from.RowIndex - GetRowDiff(from, to), from.ColumnIndex - GetColumnDiff(from, to)].IsFigureOnCell() &&
+                ChessBoard.INSTANCE[to.RowIndex + GetRowDiff(from, to), to.ColumnIndex + GetColumnDiff(from, to)]
+                .Equals(ChessBoard.INSTANCE[from.RowIndex - GetRowDiff(from, to), from.ColumnIndex - GetColumnDiff(from, to)])
+                )
+                return true;
 
-            if (moveForward || killingOtherFigure)
-                    isValidMove = true;
-            else if ((from.RowIndex == 1 || from.RowIndex == ChessBoard.INSTANCE.BoardSize - 2) &&
-                moveFromStartingPosition)
-                    isValidMove = true;
+            return false;
+        }
 
-            return isValidMove;
+        int GetColumnDiff(BoardCell from, BoardCell to)
+        {
+            return from.ColumnIndex.CompareTo(to.ColumnIndex);
+        }
+
+        int GetRowDiff(BoardCell from, BoardCell to)
+        {
+            return from.RowIndex.CompareTo(to.RowIndex);
         }
     }
 }
