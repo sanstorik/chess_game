@@ -69,10 +69,7 @@ public class BoardExample  {
         foreach (var figure in redFigures)
             foreach (var cell in board)
                 if (figure.IsPossibleMove(this, board[figure.row, figure.column], cell))
-                {
-                    Debug.Log(cell.IsFigureOnCell());
                     yield return new MoveExample(board[figure.row,figure.column], cell.Clone(), new BoardExample(this), true);
-                }
     }
 
     public IEnumerable<MoveExample> GetPossibleBlueMoves()

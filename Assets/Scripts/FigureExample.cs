@@ -22,7 +22,8 @@ public class FigureExample{
     public bool IsPossibleMove(BoardExample board, CellExample from, CellExample to)
     {
         if (from.row == to.row &&
-            from.column == to.column)
+            from.column == to.column ||
+            board[to.row, to.column].IsFigureOnCell())
             return false;
 
         bool rightLeftMove = Math.Abs(from.row - to.row) + Math.Abs(from.column - to.column) == 1;

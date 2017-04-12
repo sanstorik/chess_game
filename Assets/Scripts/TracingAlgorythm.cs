@@ -19,6 +19,8 @@ public class TracingAlgorythm {
             moves.Add(move);
             Debug.Log(move);
         }
+
+        moves[0].FindChilds(0, moves[0].IsRedMove());
     }
 
     public static TracingAlgorythm GetInstance()

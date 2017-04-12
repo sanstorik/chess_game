@@ -44,12 +44,9 @@ public class Board : MonoBehaviour {
 
         CreateFigures();
 
-        var newBoard = new BoardExample();
+        BoardExample board1 = new BoardExample();
+        print(board1[0, 0].GetFigureOrDefault().IsPossibleMove(board1, board1[0, 0], board1[0, 1]));
 
-        print(newBoard[5, 4].IsFigureOnCell());
-        print(newBoard[7, 7].IsFigureOnCell());
-
-        print(newBoard[0, 1].GetFigureOrDefault().IsPossibleMove(newBoard, newBoard[0,1],newBoard[0, 5]));
         TracingAlgorythm.GetInstance().Solve();
     }
 
