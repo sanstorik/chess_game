@@ -23,7 +23,7 @@ public class CellExample {
     {
         this.figure = figure;
         isFigureOnCell = true;
-        figure.currentCell = this;
+        figure.from = this;
     }
 
     public FigureExample GetFigureOrDefault()

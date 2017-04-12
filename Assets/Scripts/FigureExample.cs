@@ -4,11 +4,17 @@ using System;
 
 public class FigureExample{
     bool isRed;
-    public CellExample currentCell;
+    public CellExample from;
 
     public FigureExample(bool isRed)
     {
         this.isRed = isRed;
+    }
+
+    public FigureExample(bool isRed, CellExample from)
+    {
+        this.isRed = isRed;
+        this.from = from;
     }
 
     public bool IsRed()
@@ -16,9 +22,10 @@ public class FigureExample{
         return isRed;
     }
 
-    public bool IsPossibleMove(BoardExample board, CellExample from, CellExample to)
+    public bool IsPossibleMove(BoardExample board, CellExample to)
     {
-        if (from == to)
+        if (from.row == to.row &&
+            from.column == to.column)
             return false;
 
         bool rightLeftMove = Math.Abs(from.row - to.row) + Math.Abs(from.column - to.column) == 1;
@@ -37,6 +44,11 @@ public class FigureExample{
             return true;
 
         return false;
+    }
+
+    public FigureExample Clone()
+    {
+        return new FigureExample(isRed, from.Clone());
     }
 
     int GetColumnDiff(CellExample from, CellExample to)

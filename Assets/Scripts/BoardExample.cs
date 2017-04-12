@@ -7,7 +7,6 @@ public class BoardExample  {
     CellExample[,] board;
     HashSet<FigureExample> redFigures;
     HashSet<FigureExample> blueFigures;
-    float boardValue;
 
     public BoardExample()
     {
@@ -25,8 +24,11 @@ public class BoardExample  {
             for (int j = 0; j < board.GetCells().GetLength(0); j++)
                 this.board[i, j] = board.GetCells()[i, j].Clone();
 
-        redFigures = new HashSet<FigureExample>(board.redFigures);
-        blueFigures = new HashSet<FigureExample>(board.blueFigures);
+        foreach (var figure in board.redFigures)
+            redFigures.Add(figure.Clone());
+
+        foreach (var figure in board.blueFigures)
+            blueFigures.Add(figure.Clone());
     }
 
     void Init()
@@ -62,10 +64,30 @@ public class BoardExample  {
             }
     }
 
+    public IEnumerable<MoveExample> GetPossibleRedMoves()
+    {
+        foreach (var figure in redFigures)
+            foreach (var cell in board)
+                if (figure.IsPossibleMove(this, cell))
+                {
+                    Debug.Log(cell.IsFigureOnCell());
+                    Debug.Log(figure.from.row + " " + figure.from.column + " to " + cell.row + " " + cell.column);
+                    yield return new MoveExample(figure.from, cell, this, true);
+                }
+    }
+
+    public IEnumerable<MoveExample> GetPossibleBlueMoves()
+    {
+        foreach (var figure in blueFigures)
+            foreach (var cell in board)
+                if (figure.IsPossibleMove(this, cell))
+                    yield return new MoveExample(figure.from, cell, this, false);
+    }
+
     public bool MoveFigure(CellExample from, CellExample to)
     {
         if (!from.IsFigureOnCell() ||
-            !from.GetFigureOrDefault().IsPossibleMove(this, from,to))
+            !from.GetFigureOrDefault().IsPossibleMove(this, to))
             return false;
 
         var figure = from.GetFigureOrDefault();
@@ -93,9 +115,9 @@ public class BoardExample  {
     }
 
 
-    public void EvaluateBoardValue()
+    public float EvaluateBoardValue()
     {
-        boardValue = EvaluateBoardValue(false) - EvaluateBoardValue(true);
+        return EvaluateBoardValue(false) - EvaluateBoardValue(true);
     }
 
     public float EvaluateBoardValue(bool isRed)
@@ -115,11 +137,11 @@ public class BoardExample  {
 
         if (isRed)
             foreach (var figure in redFigures)
-                value += values[figure.currentCell.row, figure.currentCell.column];
+                value += values[figure.from.row, figure.from.column];
         else
             foreach (var figure in blueFigures)
-                value += values[(Board.BOARD_SIZE - 1) - figure.currentCell.row, 
-                    (Board.BOARD_SIZE - 1) - figure.currentCell.column];
+                value += values[(Board.BOARD_SIZE - 1) - figure.from.row, 
+                    (Board.BOARD_SIZE - 1) - figure.from.column];
 
         return value;
     }
