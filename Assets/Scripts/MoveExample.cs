@@ -28,7 +28,12 @@ public class MoveExample {
 
     public HashSet<MoveExample> FindChilds(bool isRedMove)
     {
-        Debug.Log("CHILDS");
+        if (board.WinnerIsFound())
+        {
+            Debug.Log("WINNER FOUND");
+            return null;
+        }
+      //  Debug.Log("CHILDS");
         if (isRedMove)
             foreach (var move in board.GetPossibleRedMoves())
             {

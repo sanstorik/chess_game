@@ -15,25 +15,21 @@ public class TracingAlgorythm {
     public void Solve() 
     {
         BoardExample mainBoard = new BoardExample();
+        foreach (var rule in mainBoard.GetPossibleRedMoves())
+            Debug.Log(rule);
 
         //first RED
-        foreach (var move in mainBoard.GetPossibleRedMoves())
-            moves.Add(move);
+        foreach (var zeroMove in mainBoard.GetPossibleRedMoves())
+            //SECOND RED
+            foreach (var firstMove in zeroMove.FindChilds(!zeroMove.IsRedMove()))
+                //THIRD BLUE
+                foreach (var moveSecond in firstMove.FindChilds(!firstMove.IsRedMove()))
+                    //FOURTH RED
+                    foreach (var moveThird in moveSecond.FindChilds(!moveSecond.IsRedMove()))
+                        ;
 
-        //second BLUE
-        HashSet<MoveExample> childMoves = moves.ElementAt(0).FindChilds(!moves.ElementAt(0).IsRedMove());
+        // 25^4 = 390k possible moves
 
-
-        //THIRD RED
-        foreach (var move in childMoves)
-        {
-            //FOURTH BLUE
-            foreach (var moveSecond in move.FindChilds(!move.IsRedMove()))
-                //FIFTH RED
-                foreach (var moveThird in moveSecond.FindChilds(!moveSecond.IsRedMove()))
-                    //SIXTH BLUE
-                    foreach (var moveFourth in moveSecond.FindChilds(!moveThird.IsRedMove()));
-        }
     }
 
     public static TracingAlgorythm GetInstance()
