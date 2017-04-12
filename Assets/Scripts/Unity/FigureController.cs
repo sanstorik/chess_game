@@ -24,8 +24,6 @@ public class FigureController : MonoBehaviour {
                 figure = new Rook(cell, isWhiteFigure);
                 break;
         }
-
-        figure.OnFigureRemovedEvent += () => gameObject.SetActive(false);
     }
 
     public bool MoveFigure(BoardCell to)
