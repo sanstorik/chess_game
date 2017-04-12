@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\FigureExample.cs" />
     <Compile Include="Assets\Scripts\Figures\Figure.cs" />
     <Compile Include="Assets\Scripts\Figures\Pawn.cs" />
+    <Compile Include="Assets\Scripts\MoveExample.cs" />
     <Compile Include="Assets\Scripts\Unity\Board.cs" />
     <Compile Include="Assets\Scripts\Unity\CellController.cs" />
     <Compile Include="Assets\Scripts\Unity\EndGame.cs" />

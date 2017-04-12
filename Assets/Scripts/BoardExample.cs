@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BoardExample  {
 
     CellExample[,] board;
+    HashSet<FigureExample> redFigures;
+    HashSet<FigureExample> blueFigures;
 
     public BoardExample()
     {
@@ -31,11 +34,19 @@ public class BoardExample  {
     {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
-                board[i, j].SetFigure(new FigureExample(true));
+            {
+                FigureExample figure = new FigureExample(true);
+                redFigures.Add(figure);
+                board[i, j].SetFigure(figure);
+            }
 
         for (int i = Board.BOARD_SIZE - 1; i >= Board.BOARD_SIZE - 3; i--)
             for (int j = Board.BOARD_SIZE - 1; j >= Board.BOARD_SIZE - 3; j--)
-                board[i, j].SetFigure(new FigureExample(false));
+            {
+                FigureExample figure = new FigureExample(false);
+                blueFigures.Add(figure);
+                board[i, j].SetFigure(figure);
+            }
     }
 
     public bool MoveFigure(CellExample from, CellExample to)
@@ -66,5 +77,20 @@ public class BoardExample  {
     public CellExample[,] GetCells()
     {
         return board;
+    }
+
+
+    void EvaluateRedValue()
+    {
+        int[,] values = {
+            {10,9,8,7,5,5,5,5},
+            {9,8,7,5,5,4,4,4},
+            {8,7,5,5,4,3,3,3 },
+            {7,5,5,4,3,2,2,2 },
+            {5,5,4,3,2,1,1,1 },
+            {5,4,3,2,1,0,0,0 },
+            {5,4,3,2,1,0,0,0 },
+            {5,4,3,2,1,0,0,0}
+        };
     }
 }

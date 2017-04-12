@@ -49,6 +49,8 @@ public class Board : MonoBehaviour {
 
         print(newBoard[5, 4].IsFigureOnCell());
         print(newBoard[7, 7].IsFigureOnCell());
+
+        print(newBoard[0, 1].GetFigureOrDefault().IsPossibleMove(newBoard, newBoard[0, 1], newBoard[0, 3]));
 	}
 
     void CreateCell(int row, int column)

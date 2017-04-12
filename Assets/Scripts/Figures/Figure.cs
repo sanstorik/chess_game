@@ -59,7 +59,6 @@ namespace Shvetsov_Int_knowl_lab_4.Figures
                 else
                 {
                     isSecondFigureSameColor = false;
-                    Figure deletedFigure = to.DeleteFigureFromCell();
 
                     to.SetFigureOnCell(this);
                 }
