@@ -13,21 +13,11 @@ namespace Shvetsov_Int_knowl_lab_4.Figures
         protected bool isWhiteFigure;
 
         public event Action<BoardCell> OnFigureMovedEvent;
-        public event Action OnFigureRemovedEvent;
 
         protected Figure(BoardCell currentCell, bool isWhiteFigure)
         {
             this.isWhiteFigure = isWhiteFigure;
             this.currentCell = currentCell;
-
-            OnFigureRemovedEvent += () =>
-            {
-                if (isWhiteFigure)
-                    GameData.whiteFiguresRemoved++;
-                else
-                    GameData.blackFiguresRemoved++;
-            };
-
             OnFigureMovedEvent += (cell) => GameData.ChangeTurn();
         }
 
@@ -70,7 +60,6 @@ namespace Shvetsov_Int_knowl_lab_4.Figures
                 {
                     isSecondFigureSameColor = false;
                     Figure deletedFigure = to.DeleteFigureFromCell();
-                    deletedFigure.OnFigureRemovedEvent();
 
                     to.SetFigureOnCell(this);
                 }
