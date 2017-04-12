@@ -23,7 +23,8 @@ public class CellExample {
     {
         this.figure = figure;
         isFigureOnCell = true;
-        figure.from = this;
+        figure.row = row;
+        figure.column = column;
     }
 
     public FigureExample GetFigureOrDefault()
@@ -39,7 +40,11 @@ public class CellExample {
     public CellExample Clone()
     {
         var cell = new CellExample(row, column);
-        cell.figure = figure;
+        if (figure != null)
+            cell.figure = figure.Clone();
+        else
+            cell.figure = null;
+
         cell.isFigureOnCell = isFigureOnCell;
 
         return cell;

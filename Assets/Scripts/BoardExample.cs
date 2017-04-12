@@ -50,7 +50,7 @@ public class BoardExample  {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
             {
-                FigureExample figure = new FigureExample(true);
+                FigureExample figure = new FigureExample(true,i,j);
                 redFigures.Add(figure);
                 board[i, j].SetFigure(figure);
             }
@@ -58,7 +58,7 @@ public class BoardExample  {
         for (int i = Board.BOARD_SIZE - 1; i >= Board.BOARD_SIZE - 3; i--)
             for (int j = Board.BOARD_SIZE - 1; j >= Board.BOARD_SIZE - 3; j--)
             {
-                FigureExample figure = new FigureExample(false);
+                FigureExample figure = new FigureExample(false,i,j);
                 blueFigures.Add(figure);
                 board[i, j].SetFigure(figure);
             }
@@ -68,11 +68,10 @@ public class BoardExample  {
     {
         foreach (var figure in redFigures)
             foreach (var cell in board)
-                if (figure.IsPossibleMove(this, cell))
+                if (figure.IsPossibleMove(this, board[figure.row, figure.column], cell))
                 {
                     Debug.Log(cell.IsFigureOnCell());
-                    Debug.Log(figure.from.row + " " + figure.from.column + " to " + cell.row + " " + cell.column);
-                    yield return new MoveExample(figure.from, cell, this, true);
+                    yield return new MoveExample(board[figure.row,figure.column], cell.Clone(), new BoardExample(this), true);
                 }
     }
 
@@ -80,14 +79,14 @@ public class BoardExample  {
     {
         foreach (var figure in blueFigures)
             foreach (var cell in board)
-                if (figure.IsPossibleMove(this, cell))
-                    yield return new MoveExample(figure.from, cell, this, false);
+                if (figure.IsPossibleMove(this, board[figure.row, figure.column],cell))
+                    yield return new MoveExample(board[figure.row, figure.column], cell.Clone(), this, false);
     }
 
     public bool MoveFigure(CellExample from, CellExample to)
     {
         if (!from.IsFigureOnCell() ||
-            !from.GetFigureOrDefault().IsPossibleMove(this, to))
+            !from.GetFigureOrDefault().IsPossibleMove(this,from, to))
             return false;
 
         var figure = from.GetFigureOrDefault();
@@ -137,11 +136,11 @@ public class BoardExample  {
 
         if (isRed)
             foreach (var figure in redFigures)
-                value += values[figure.from.row, figure.from.column];
+                value += values[figure.row, figure.column];
         else
             foreach (var figure in blueFigures)
-                value += values[(Board.BOARD_SIZE - 1) - figure.from.row, 
-                    (Board.BOARD_SIZE - 1) - figure.from.column];
+                value += values[(Board.BOARD_SIZE - 1) - figure.row, 
+                    (Board.BOARD_SIZE - 1) - figure.column];
 
         return value;
     }

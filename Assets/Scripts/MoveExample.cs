@@ -18,9 +18,10 @@ public class MoveExample {
 
         this.from = from;
         this.to = to;
+        this.board = board;
 
-        this.board = new BoardExample(board);
-        //this.board.MoveFigure(from, to);
+        //this.board = new BoardExample(board);
+        this.board.MoveFigure(from, to);
 
         moveValue = this.board.EvaluateBoardValue();
     }

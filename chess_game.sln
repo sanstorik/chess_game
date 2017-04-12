@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chess_game", "chess_game.csproj", "{3029EF60-7E59-B8D8-BC41-BD430A6ED34B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chess_Game", "chess_Game.csproj", "{1310E384-73A8-BA98-27C2-1708659DD64B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3029EF60-7E59-B8D8-BC41-BD430A6ED34B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3029EF60-7E59-B8D8-BC41-BD430A6ED34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3029EF60-7E59-B8D8-BC41-BD430A6ED34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3029EF60-7E59-B8D8-BC41-BD430A6ED34B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1310E384-73A8-BA98-27C2-1708659DD64B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1310E384-73A8-BA98-27C2-1708659DD64B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1310E384-73A8-BA98-27C2-1708659DD64B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1310E384-73A8-BA98-27C2-1708659DD64B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
