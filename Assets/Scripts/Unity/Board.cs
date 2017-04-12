@@ -5,7 +5,7 @@ using Shvetsov_Int_knowl_lab_4.Figures;
 
 public class Board : MonoBehaviour {
     static Board instance;
-    const int BOARD_SIZE = 8;
+    public const int BOARD_SIZE = 8;
 
     [SerializeField]
     GameObject whiteCellPrefab;

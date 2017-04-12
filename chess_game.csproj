@@ -78,6 +78,9 @@
     <Compile Include="Assets\Scripts\Board\BoardCell.cs" />
     <Compile Include="Assets\Scripts\Board\ChessBoard.cs" />
     <Compile Include="Assets\Scripts\Board\GameData.cs" />
+    <Compile Include="Assets\Scripts\BoardExample.cs" />
+    <Compile Include="Assets\Scripts\CellExample.cs" />
+    <Compile Include="Assets\Scripts\FigureExample.cs" />
     <Compile Include="Assets\Scripts\Figures\Figure.cs" />
     <Compile Include="Assets\Scripts\Figures\Pawn.cs" />
     <Compile Include="Assets\Scripts\Unity\Board.cs" />
