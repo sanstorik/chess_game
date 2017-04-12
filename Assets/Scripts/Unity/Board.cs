@@ -43,6 +43,12 @@ public class Board : MonoBehaviour {
                     CreateCell(row,column);
 
         CreateFigures();
+
+        var newBoard = new BoardExample();
+        newBoard.CreateDefaultFigures();
+
+        print(newBoard[5, 4].IsFigureOnCell());
+        print(newBoard[7, 7].IsFigureOnCell());
 	}
 
     void CreateCell(int row, int column)
