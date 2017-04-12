@@ -45,15 +45,15 @@ public class Board : MonoBehaviour {
         CreateFigures();
 
         var newBoard = new BoardExample();
-        newBoard.CreateDefaultFigures();
 
         print(newBoard[5, 4].IsFigureOnCell());
         print(newBoard[7, 7].IsFigureOnCell());
 
         print(newBoard[0, 1].GetFigureOrDefault().IsPossibleMove(newBoard, newBoard[0, 1], newBoard[0, 3]));
+        print(newBoard.EvaluateBoardValue(true));
+        print(newBoard.MoveFigure(newBoard[0, 1], newBoard[0, 3]));
 
-        print(newBoard.EvaluateValue(true));
-        print(newBoard.EvaluateValue(false));
+        print(newBoard.EvaluateBoardValue(true));
     }
 
     void CreateCell(int row, int column)

@@ -7,24 +7,33 @@ public class BoardExample  {
     CellExample[,] board;
     HashSet<FigureExample> redFigures;
     HashSet<FigureExample> blueFigures;
+    float boardValue;
 
     public BoardExample()
     {
-        redFigures = new HashSet<FigureExample>();
-        blueFigures = new HashSet<FigureExample>();
-        board = new CellExample[Board.BOARD_SIZE, Board.BOARD_SIZE];
+        Init();
+
         CreateCells();
+        CreateDefaultFigures();
     }
 
     public BoardExample(BoardExample board)
     {
-        this.board = new CellExample[Board.BOARD_SIZE, Board.BOARD_SIZE];
-        redFigures = new HashSet<FigureExample>();
-        blueFigures = new HashSet<FigureExample>();
+        Init();
 
         for (int i = 0; i < board.GetCells().GetLength(0); i++)
             for (int j = 0; j < board.GetCells().GetLength(0); j++)
                 this.board[i, j] = board.GetCells()[i, j].Clone();
+
+        redFigures = new HashSet<FigureExample>(board.redFigures);
+        blueFigures = new HashSet<FigureExample>(board.blueFigures);
+    }
+
+    void Init()
+    {
+        this.board = new CellExample[Board.BOARD_SIZE, Board.BOARD_SIZE];
+        redFigures = new HashSet<FigureExample>();
+        blueFigures = new HashSet<FigureExample>();
     }
 
     void CreateCells()
@@ -34,7 +43,7 @@ public class BoardExample  {
                 board[row, column] = new CellExample(row, column);
     }
 
-    public void CreateDefaultFigures()
+    void CreateDefaultFigures()
     {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
@@ -84,7 +93,12 @@ public class BoardExample  {
     }
 
 
-    public float EvaluateValue(bool isRed)
+    public void EvaluateBoardValue()
+    {
+        boardValue = EvaluateBoardValue(false) - EvaluateBoardValue(true);
+    }
+
+    public float EvaluateBoardValue(bool isRed)
     {
         int[,] values = {
             {10,9,8,7,5,5,5,5},
@@ -106,7 +120,6 @@ public class BoardExample  {
             foreach (var figure in blueFigures)
                 value += values[(Board.BOARD_SIZE - 1) - figure.currentCell.row, 
                     (Board.BOARD_SIZE - 1) - figure.currentCell.column];
-
 
         return value;
     }
