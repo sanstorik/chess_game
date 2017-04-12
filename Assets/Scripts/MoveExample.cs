@@ -6,7 +6,7 @@ using System.Linq;
 public class MoveExample {
     CellExample from;
     CellExample to;
-    HashSet<MoveExample> movesAfterThisMove;
+    public HashSet<MoveExample> movesAfterThisMove;
 
     BoardExample board;
     float moveValue;
@@ -26,28 +26,43 @@ public class MoveExample {
         moveValue = this.board.EvaluateBoardValue();
     }
 
-    public void FindChilds(int cycle, bool isRedMove)
+    public HashSet<MoveExample> FindChilds(bool isRedMove)
     {
-        if (cycle == 6)
-            return;
-
         Debug.Log("CHILDS");
         if (isRedMove)
             foreach (var move in board.GetPossibleRedMoves())
             {
                 movesAfterThisMove.Add(move);
-                Debug.Log(move);
+               // Debug.Log(move);
             }
         else
         {
             foreach (var move in board.GetPossibleBlueMoves())
             {
                 movesAfterThisMove.Add(move);
-                Debug.Log(move);
+              //  Debug.Log(move);
             }
         }
 
-        movesAfterThisMove.ElementAt(0).FindChilds(cycle++, !isRedMove);
+       // Debug.Log(movesAfterThisMove.Count);
+        this.isRedMove = isRedMove;
+
+        return movesAfterThisMove;
+    }
+
+    public bool FindChildInChilds()
+    {
+        if (board.WinnerIsFound())
+        {
+            Debug.Log("winner");
+            return true;
+        }
+
+        Debug.Log(movesAfterThisMove.Count);
+        foreach (var move in movesAfterThisMove)
+            move.FindChilds(!isRedMove);
+
+        return false;
     }
 
     public bool IsRedMove()
@@ -63,5 +78,17 @@ public class MoveExample {
     public override string ToString()
     {
         return "from " + (from.row + 1) + " " + (from.column + 1) + "  | to " + (to.row + 1) + " " + (to.column + 1);
+    }
+
+    public override bool Equals(object obj)
+    {
+        MoveExample move = (MoveExample)obj;
+        return move.from.column == from.column && move.from.row == from.row &&
+            move.to.column == to.column && move.from.column == to.column;
+    }
+
+    public override int GetHashCode()
+    {
+        return from.row ^ to.row ^ from.column ^ to.column;
     }
 }

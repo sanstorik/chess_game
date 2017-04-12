@@ -80,6 +80,12 @@ public class BoardExample  {
                     yield return new MoveExample(board[figure.row, figure.column], cell.Clone(), this, false);
     }
 
+    public bool WinnerIsFound()
+    {
+        return EvaluateBoardValue(true) == 0 ||
+            EvaluateBoardValue(false) == 0;
+    }
+
     public bool MoveFigure(CellExample from, CellExample to)
     {
         if (!from.IsFigureOnCell() ||
