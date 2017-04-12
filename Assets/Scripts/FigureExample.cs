@@ -4,6 +4,7 @@ using System;
 
 public class FigureExample{
     bool isRed;
+    public CellExample currentCell;
 
     public FigureExample(bool isRed)
     {
@@ -30,8 +31,8 @@ public class FigureExample{
             board[from.row - GetRowDiff(from, to), from.column - GetColumnDiff(from, to)].IsFigureOnCell() &&
             board[from.row - GetRowDiff(from, to), from.column - GetColumnDiff(from, to)].IsFigureOnCell() &&
             board[to.row + GetRowDiff(from, to), to.column + GetColumnDiff(from, to)]
-            .Equals(board[from.row - GetRowDiff(from, to), from.column - GetColumnDiff(from, to)])
-            && ( GetColumnDiff(from, to) == 0 || GetRowDiff(from, to) == 0 )
+            .Equals(board[from.row - GetRowDiff(from, to), from.column - GetColumnDiff(from, to)]) &&
+            ( GetColumnDiff(from, to) == 0 || GetRowDiff(from, to) == 0 )
             )
             return true;
 
