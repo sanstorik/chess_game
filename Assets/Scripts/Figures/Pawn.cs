@@ -26,6 +26,7 @@ namespace Shvetsov_Int_knowl_lab_4.Figures
                 ChessBoard.INSTANCE[from.RowIndex - GetRowDiff(from, to), from.ColumnIndex - GetColumnDiff(from, to)].IsFigureOnCell() &&
                 ChessBoard.INSTANCE[to.RowIndex + GetRowDiff(from, to), to.ColumnIndex + GetColumnDiff(from, to)]
                 .Equals(ChessBoard.INSTANCE[from.RowIndex - GetRowDiff(from, to), from.ColumnIndex - GetColumnDiff(from, to)])
+                && (GetColumnDiff(from, to) == 0 || GetRowDiff(from,to) == 0)
                 )
                 return true;
 
