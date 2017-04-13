@@ -69,7 +69,7 @@ public class BoardExample  {
         foreach (var figure in redFigures)
             foreach (var cell in board)
                 if (figure.IsPossibleMove(this, board[figure.row, figure.column], cell))
-                    yield return new MoveExample(board[figure.row,figure.column], cell.Clone(), new BoardExample(this), true);
+                    yield return new MoveExample(figure.row,figure.column, cell.row,cell.column, new BoardExample(this), true);
     }
 
     public IEnumerable<MoveExample> GetPossibleBlueMoves()
@@ -77,7 +77,7 @@ public class BoardExample  {
         foreach (var figure in blueFigures)
             foreach (var cell in board)
                 if (figure.IsPossibleMove(this, board[figure.row, figure.column],cell))
-                    yield return new MoveExample(board[figure.row, figure.column], cell.Clone(), this, false);
+                    yield return new MoveExample(figure.row, figure.column, cell.row, cell.column, this, false);
     }
 
     public bool WinnerIsFound()
@@ -86,8 +86,11 @@ public class BoardExample  {
             EvaluateBoardValue(false) == 0;
     }
 
-    public bool MoveFigure(CellExample from, CellExample to)
+    public bool MoveFigure(int fromRow, int fromColumn, int toRow, int toColumn)
     {
+        CellExample from = board[fromRow, fromColumn];
+        CellExample to = board[toRow, toColumn];
+
         if (!from.IsFigureOnCell() ||
             !from.GetFigureOrDefault().IsPossibleMove(this,from, to))
             return false;

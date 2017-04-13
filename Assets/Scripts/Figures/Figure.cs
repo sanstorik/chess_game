@@ -23,13 +23,8 @@ namespace Shvetsov_Int_knowl_lab_4.Figures
 
         public bool MoveFigure(BoardCell to)
         {
-            if (!CheckMove(to))
-                return false;
-
-            bool isSecondFigureSameColor;
-            InteractWithFigureOnCell(to, out isSecondFigureSameColor);
-
-            if (isSecondFigureSameColor)
+            if (!CheckMove(to) ||
+                to.IsFigureOnCell())
                 return false;
 
             currentCell.DeleteFigureFromCell();
@@ -45,24 +40,6 @@ namespace Shvetsov_Int_knowl_lab_4.Figures
             currentCell.DeleteFigureFromCell();
             to.SetFigureOnCell(this);
             currentCell = to;
-        }
-
-        private void InteractWithFigureOnCell(BoardCell to, out bool isSecondFigureSameColor)
-        {
-            isSecondFigureSameColor = false;
-
-            var figureOnCell = to.GetFigureOrDefault();
-            if (figureOnCell != null)
-            {
-                if (figureOnCell.isWhiteFigure == isWhiteFigure)
-                    isSecondFigureSameColor = true;
-                else
-                {
-                    isSecondFigureSameColor = false;
-
-                    to.SetFigureOnCell(this);
-                }
-            }
         }
 
         public abstract bool CheckMove(BoardCell from, BoardCell to);
