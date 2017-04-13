@@ -32,39 +32,36 @@ public class MoveExample {
         moveValue = this.board.EvaluateBoardValue();
     }
 
-    public HashSet<MoveExample> FindChilds(bool isRedMove, out MoveExample bestMove)
+    public MoveExample FindChilds(bool isRedMove)
     {
         if (board.WinnerIsFound())
         {
             Debug.Log("WINNER FOUND");
-            bestMove = null;
             return null;
         }
 
-       // Debug.Log("CHILDS");
+        this.isRedMove = isRedMove;
+
+        // Debug.Log("CHILDS");
         if (isRedMove)
+        {
             foreach (var move in board.GetPossibleRedMoves())
-            {
                 movesAfterThisMove.Add(move);
-               // Debug.Log(move);
-            }
+
+            return FindBestRedMove();
+        }
         else
         {
             foreach (var move in board.GetPossibleBlueMoves())
-            {
                 movesAfterThisMove.Add(move);
-              //  Debug.Log(move);
-            }
+
+            return FindBestBlueMove();
         }
 
-        this.isRedMove = isRedMove;
-        bestMove = FindBestMove();
-
-        return movesAfterThisMove;
     }
 
 
-    MoveExample FindBestMove()
+    MoveExample FindBestRedMove()
     {
         var move = movesAfterThisMove.ElementAt(0);
         float max = move.GetBoardValueAfterMove();
@@ -76,8 +73,24 @@ public class MoveExample {
                 move = newMove;
             }
 
-        MoveExample bestMove = new MoveExample(move.fromRow, move.fromColumn, move.toRow, move.toColumn, board, isRedMove);
-        bestMove.movesAfterThisMove = movesAfterThisMove;
+        MoveExample bestMove = new MoveExample(move.fromRow, move.fromColumn, move.toRow, move.toColumn, new BoardExample(board), isRedMove);
+
+        return bestMove;
+    }
+
+    MoveExample FindBestBlueMove()
+    {
+        var move = movesAfterThisMove.ElementAt(0);
+        float min = move.GetBoardValueAfterMove();
+
+        foreach (var newMove in movesAfterThisMove)
+            if (newMove.GetBoardValueAfterMove() < min)
+            {
+                min = newMove.GetBoardValueAfterMove();
+                move = newMove;
+            }
+
+        MoveExample bestMove = new MoveExample(move.fromRow, move.fromColumn, move.toRow, move.toColumn, new BoardExample(board), isRedMove);
 
         return bestMove;
     }
@@ -97,8 +110,6 @@ public class MoveExample {
         return false;
     }
 
-    //public MoveExample
-
     public bool IsRedMove()
     {
         return isRedMove;
@@ -111,7 +122,8 @@ public class MoveExample {
 
     public override string ToString()
     {
-        return "from " + (fromRow + 1) + " " + (fromColumn + 1) + "  | to " + (toRow + 1) + " " + (toColumn + 1);
+        return "from " + ( fromRow + 1 ) + " " + ( fromColumn + 1 ) + "  | to " + ( toRow + 1 ) + " " + ( toColumn + 1 ) + "| value =" + GetBoardValueAfterMove() 
+            + " | isRed = " + isRedMove;
     }
 
     public override bool Equals(object obj)

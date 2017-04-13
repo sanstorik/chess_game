@@ -5,8 +5,6 @@ using System.Collections.Generic;
 public class BoardExample  {
 
     CellExample[,] board;
-    HashSet<FigureExample> redFigures;
-    HashSet<FigureExample> blueFigures;
 
     public BoardExample()
     {
@@ -23,19 +21,11 @@ public class BoardExample  {
         for (int i = 0; i < board.GetCells().GetLength(0); i++)
             for (int j = 0; j < board.GetCells().GetLength(0); j++)
                 this.board[i, j] = board.GetCells()[i, j].Clone();
-
-        foreach (var figure in board.redFigures)
-            redFigures.Add(figure.Clone());
-
-        foreach (var figure in board.blueFigures)
-            blueFigures.Add(figure.Clone());
     }
 
     void Init()
     {
         this.board = new CellExample[Board.BOARD_SIZE, Board.BOARD_SIZE];
-        redFigures = new HashSet<FigureExample>();
-        blueFigures = new HashSet<FigureExample>();
     }
 
     void CreateCells()
@@ -51,7 +41,6 @@ public class BoardExample  {
             for (int j = 0; j < 3; j++)
             {
                 FigureExample figure = new FigureExample(true,i,j);
-                redFigures.Add(figure);
                 board[i, j].SetFigure(figure);
             }
 
@@ -59,14 +48,13 @@ public class BoardExample  {
             for (int j = Board.BOARD_SIZE - 1; j >= Board.BOARD_SIZE - 3; j--)
             {
                 FigureExample figure = new FigureExample(false,i,j);
-                blueFigures.Add(figure);
                 board[i, j].SetFigure(figure);
             }
     }
 
     public IEnumerable<MoveExample> GetPossibleRedMoves()
     {
-        foreach (var figure in redFigures)
+        foreach (var figure in GetRedMoves())
             foreach (var cell in board)
                 if (figure.IsPossibleMove(this, board[figure.row, figure.column], cell))
                     yield return new MoveExample(figure.row,figure.column, cell.row,cell.column, new BoardExample(this), true);
@@ -74,7 +62,7 @@ public class BoardExample  {
 
     public IEnumerable<MoveExample> GetPossibleBlueMoves()
     {
-        foreach (var figure in blueFigures)
+        foreach (var figure in GetBlueMoves())
             foreach (var cell in board)
                 if (figure.IsPossibleMove(this, board[figure.row, figure.column],cell))
                     yield return new MoveExample(figure.row, figure.column, cell.row, cell.column, this, false);
@@ -82,6 +70,7 @@ public class BoardExample  {
 
     public bool WinnerIsFound()
     {
+        Debug.Log("red value = " + EvaluateBoardValue(true) + "|  blue value =" + EvaluateBoardValue(false));
         return EvaluateBoardValue(true) == 0 ||
             EvaluateBoardValue(false) == 0;
     }
@@ -119,6 +108,22 @@ public class BoardExample  {
         return board;
     }
 
+    IEnumerable<FigureExample> GetRedMoves()
+    {
+        foreach (var cell in board)
+            if (cell.IsFigureOnCell() &&
+                cell.GetFigureOrDefault().IsRed())
+                yield return cell.GetFigureOrDefault();
+    }
+
+    IEnumerable<FigureExample> GetBlueMoves()
+    {
+        foreach (var cell in board)
+            if (cell.IsFigureOnCell() &&
+                !cell.GetFigureOrDefault().IsRed())
+                yield return cell.GetFigureOrDefault();
+    }
+
 
     public float EvaluateBoardValue()
     {
@@ -132,7 +137,7 @@ public class BoardExample  {
             {9,8,7,5,5,4,4,4},
             {8,7,5,5,4,3,3,3 },
             {7,5,5,4,3,2,2,2 },
-            {5,5,4,3,2,1,1,1 },
+            {6,5,4,3,2,1,1,1 },
             {5,4,3,2,1,0,0,0 },
             {5,4,3,2,1,0,0,0 },
             {5,4,3,2,1,0,0,0}
@@ -141,10 +146,10 @@ public class BoardExample  {
         float value = 0;
 
         if (isRed)
-            foreach (var figure in redFigures)
+            foreach (var figure in GetRedMoves())
                 value += values[figure.row, figure.column];
         else
-            foreach (var figure in blueFigures)
+            foreach (var figure in GetBlueMoves())
                 value += values[(Board.BOARD_SIZE - 1) - figure.row, 
                     (Board.BOARD_SIZE - 1) - figure.column];
 

@@ -15,8 +15,6 @@ public class TracingAlgorythm {
     public void Solve() 
     {
         BoardExample mainBoard = new BoardExample();
-        //foreach (var rule in mainBoard.GetPossibleRedMoves())
-        //    Debug.Log(rule);
 
         var firstGeneration = mainBoard.GetPossibleRedMoves();
 
@@ -30,22 +28,15 @@ public class TracingAlgorythm {
                 move = newMove;
             }
 
-        Debug.Log("max in first = " + move + "  value= " + move.GetBoardValueAfterMove());
+        Debug.Log("max in first = " + move);
 
-        MoveExample bestMove;
+        for (int i = 0; i < 1000; i++)
+        {
+            move = move.FindChilds(!move.IsRedMove());
+            Debug.Log(move);
+        }
 
-        //first RED
-        foreach (var zeroMove in firstGeneration)
-            //SECOND RED
-            foreach (var firstMove in zeroMove.FindChilds(!zeroMove.IsRedMove(), out bestMove))
-                //THIRD BLUE
-                foreach (var moveSecond in firstMove.FindChilds(!firstMove.IsRedMove(), out bestMove))
-                    //FOURTH RED
-                    foreach (var moveThird in moveSecond.FindChilds(!moveSecond.IsRedMove(), out bestMove))
-                        ;
-                        //FIFTH BLUE
-                        //foreach (var moveForuth in moveThird.FindChilds(!moveThird.IsRedMove()))
-                        //    ;
+
 
 
         // 25^4 = 390k possible moves
